@@ -30,7 +30,11 @@ export default async function Home() {
         <Gallery photos={site.gallery} />
         <Testimonials />
         <Schedule />
-        <Contact address={site.gym.address ?? undefined} phone={site.gym.phone ?? undefined} />
+        <Contact
+          address={site.gym.address ?? undefined}
+          phone={site.gym.phone ?? undefined}
+          email={site.gym.email ?? undefined}
+        />
       </main>
       <Footer address={site.gym.address ?? undefined} />
     </>

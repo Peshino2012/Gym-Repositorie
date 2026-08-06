@@ -21,14 +21,14 @@ export type SiteGalleryPhoto = {
 };
 
 export type SiteData = {
-  gym: { name: string; address: string | null; phone: string | null };
+  gym: { name: string; address: string | null; phone: string | null; email: string | null };
   plans: SitePlan[];
   trainers: SiteTrainer[];
   gallery: SiteGalleryPhoto[];
 };
 
 const EMPTY_SITE_DATA: SiteData = {
-  gym: { name: "PULSO Gym", address: null, phone: null },
+  gym: { name: "PULSO Gym", address: null, phone: null, email: null },
   plans: [],
   trainers: [],
   gallery: [],
@@ -44,7 +44,7 @@ export async function getSiteData(): Promise<SiteData> {
 
   try {
     const res = await fetch(`${base}/api/public/site`, {
-      next: { revalidate: 60 },
+      next: { revalidate: 15 },
       signal: AbortSignal.timeout(3000),
     });
     if (!res.ok) return EMPTY_SITE_DATA;

@@ -5,18 +5,38 @@ import { MapPin, Phone, Mail, Send, CheckCircle2 } from "lucide-react";
 import { InstagramIcon } from "./icons/SocialIcons";
 import ScrollReveal from "./ScrollReveal";
 import MagneticButton from "./MagneticButton";
+import { sendContactEmail } from "@/lib/contactActions";
 
 export default function Contact({
   address = "Av. Nazca 1234, Villa Devoto, CABA",
   phone = "+54 11 0000-0000",
+  email = "hola@pulsogym.com.ar",
 }: {
   address?: string;
   phone?: string;
+  email?: string;
 }) {
   const [sent, setSent] = useState(false);
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    const data = new FormData(e.currentTarget);
+    const name = String(data.get("name") ?? "");
+    const visitorPhone = String(data.get("phone") ?? "");
+    const message = String(data.get("message") ?? "");
+
+    const gymDigits = phone.replace(/\D/g, "");
+    if (gymDigits) {
+      const text = `Hola! Soy ${name} (${visitorPhone}).${message ? ` ${message}` : ""}`;
+      window.open(
+        `https://wa.me/${gymDigits}?text=${encodeURIComponent(text)}`,
+        "_blank"
+      );
+    }
+
+    sendContactEmail({ name, phone: visitorPhone, message, toEmail: email });
+
     setSent(true);
   }
 
@@ -57,7 +77,7 @@ export default function Contact({
               <Mail className="mt-0.5 h-5 w-5 shrink-0 text-power transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6" />
               <div>
                 <p className="text-sm font-bold text-white">Email</p>
-                <p className="text-sm text-muted-foreground">hola@pulsogym.com.ar</p>
+                <p className="text-sm text-muted-foreground">{email}</p>
               </div>
             </div>
             <div className="group flex items-start gap-4 rounded-2xl border border-line bg-ink p-5 transition-colors duration-300 hover:border-power/50">
@@ -75,8 +95,8 @@ export default function Contact({
                 <CheckCircle2 className="h-10 w-10 animate-pop-in text-volt" />
                 <p className="mt-4 font-display text-2xl">¡Listo!</p>
                 <p className="mt-2 max-w-xs text-sm text-muted-foreground">
-                  Formulario de demo — conectalo a tu email o CRM antes de
-                  publicar el sitio.
+                  Te abrimos WhatsApp con tu mensaje ya escrito — solo tenés
+                  que confirmar el envío.
                 </p>
               </div>
             ) : (

@@ -1,4 +1,4 @@
-import ChromaKeyVideo from "./ChromaKeyVideo";
+import HeroVideo from "./HeroVideo";
 
 export default function Hero() {
   return (
@@ -6,11 +6,14 @@ export default function Hero() {
       id="inicio"
       className="grain relative flex min-h-screen items-end overflow-hidden bg-hero-bg"
     >
-      {/* ambient aurora glow */}
+      {/* atmospheric background loop */}
+      <HeroVideo src="/media/gym-loop.mp4" />
+
+      {/* ambient aurora glow, layered over the video */}
       <div aria-hidden className="absolute inset-0 z-0">
-        <div className="animate-aurora absolute -left-32 top-0 h-[32rem] w-[32rem] rounded-full bg-power/25 blur-[110px]" />
+        <div className="animate-aurora absolute -left-32 top-0 h-[32rem] w-[32rem] rounded-full bg-power/20 blur-[110px]" />
         <div
-          className="animate-aurora absolute right-0 top-1/3 h-[26rem] w-[26rem] rounded-full bg-volt/15 blur-[110px]"
+          className="animate-aurora absolute right-0 top-1/3 h-[26rem] w-[26rem] rounded-full bg-volt/10 blur-[110px]"
           style={{ animationDelay: "-6s" }}
         />
         <div
@@ -18,20 +21,8 @@ export default function Hero() {
         />
       </div>
 
-      {/* chroma-keyed character, anchored near the wordmark */}
-      <div
-        aria-hidden
-        className="animate-float-slow absolute bottom-0 right-[2%] z-0 hidden h-[78%] w-auto max-w-[48%] sm:block md:right-[6%] lg:max-w-[42%]"
-        style={{ filter: "drop-shadow(0 0 60px rgba(255,59,46,0.35))" }}
-      >
-        <ChromaKeyVideo
-          src="/media/lift-loop.mp4"
-          className="h-full w-full"
-        />
-      </div>
-
       {/* dark overlay for legibility */}
-      <div className="absolute inset-0 z-[1] bg-black/30 pointer-events-none" />
+      <div className="absolute inset-0 z-[1] bg-black/50 pointer-events-none" />
 
       {/* content, bottom-left anchored */}
       <div className="relative z-10 w-full max-w-[90%] px-6 pb-14 pt-32 pointer-events-none sm:max-w-md md:px-10 md:pb-16 lg:max-w-2xl">

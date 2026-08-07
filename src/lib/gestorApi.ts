@@ -5,6 +5,7 @@ export type SitePlan = {
   name: string;
   price: number;
   billingCycle: BillingCycle;
+  features: string[];
 };
 
 export type SiteTrainer = {

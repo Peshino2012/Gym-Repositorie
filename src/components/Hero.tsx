@@ -35,7 +35,7 @@ export default function Hero() {
 
       {/* content, bottom-left anchored */}
       <div className="relative z-10 w-full max-w-[90%] px-6 pb-14 pt-32 pointer-events-none sm:max-w-md md:px-10 md:pb-16 lg:max-w-2xl">
-        <h1 className="mb-2 text-[clamp(3rem,8vw,6rem)] font-bold uppercase leading-[0.95] tracking-[-0.04em] text-foreground md:mb-4">
+        <h1 className="font-display mb-2 text-[clamp(3.5rem,9vw,7.5rem)] uppercase leading-[0.9] text-foreground md:mb-4">
           <span
             className="block opacity-0 animate-fade-up"
             style={{ animationDelay: "0.2s" }}

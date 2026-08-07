@@ -16,8 +16,30 @@ import { getSiteData } from "@/lib/gestorApi";
 export default async function Home() {
   const site = await getSiteData();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ExerciseGym",
+    name: site.gym.name || "PULSO Gym",
+    image: "https://gym-repositorie.vercel.app/opengraph-image",
+    url: "https://gym-repositorie.vercel.app",
+    telephone: site.gym.phone ?? undefined,
+    email: site.gym.email ?? undefined,
+    address: site.gym.address
+      ? { "@type": "PostalAddress", streetAddress: site.gym.address, addressLocality: "Buenos Aires", addressCountry: "AR" }
+      : undefined,
+    sameAs: ["https://www.instagram.com/pulsogym"],
+    openingHoursSpecification: [
+      { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "06:00", closes: "23:00" },
+      { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "08:00", closes: "13:00" },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
       <main>
         <Hero />

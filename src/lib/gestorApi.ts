@@ -41,6 +41,7 @@ export type SiteData = {
   trainers: SiteTrainer[];
   gallery: SiteGalleryPhoto[];
   classesEnabled: boolean;
+  horariosEnabled: boolean;
   scheduleBlocks: SiteScheduleBlock[];
 };
 
@@ -50,6 +51,7 @@ const EMPTY_SITE_DATA: SiteData = {
   trainers: [],
   gallery: [],
   classesEnabled: false,
+  horariosEnabled: false,
   scheduleBlocks: [],
 };
 

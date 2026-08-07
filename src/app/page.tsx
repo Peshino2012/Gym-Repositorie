@@ -34,33 +34,37 @@ export default async function Home() {
     ],
   };
 
+  const showSchedule = site.horariosEnabled && site.scheduleBlocks.length > 0;
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Header />
+      <Header classesEnabled={site.classesEnabled} horariosEnabled={showSchedule} />
       <main>
         <Hero />
         <Marquee />
         <Stats />
-        <Classes />
+        {site.classesEnabled && <Classes />}
         <WhyUs />
         <Pricing plans={site.plans} />
         <Trainers trainers={site.trainers} />
         <Gallery photos={site.gallery} />
         <Testimonials />
-        {site.classesEnabled && site.scheduleBlocks.length > 0 && (
-          <Schedule blocks={site.scheduleBlocks} />
-        )}
+        {showSchedule && <Schedule blocks={site.scheduleBlocks} />}
         <Contact
           address={site.gym.address ?? undefined}
           phone={site.gym.phone ?? undefined}
           email={site.gym.email ?? undefined}
         />
       </main>
-      <Footer address={site.gym.address ?? undefined} />
+      <Footer
+        address={site.gym.address ?? undefined}
+        classesEnabled={site.classesEnabled}
+        horariosEnabled={showSchedule}
+      />
     </>
   );
 }

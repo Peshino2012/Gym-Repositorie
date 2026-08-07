@@ -1,19 +1,23 @@
 import { Zap } from "lucide-react";
 import { InstagramIcon, FacebookIcon } from "./icons/SocialIcons";
 
-const LINKS = [
-  { href: "#clases", label: "Clases" },
-  { href: "#planes", label: "Planes" },
-  { href: "#entrenadores", label: "Entrenadores" },
-  { href: "#horarios", label: "Horarios" },
-  { href: "#contacto", label: "Contacto" },
-];
-
 export default function Footer({
   address = "Av. Nazca 1234, Villa Devoto, CABA",
+  classesEnabled = true,
+  horariosEnabled = true,
 }: {
   address?: string;
+  classesEnabled?: boolean;
+  horariosEnabled?: boolean;
 }) {
+  const LINKS = [
+    ...(classesEnabled ? [{ href: "#clases", label: "Clases" }] : []),
+    { href: "#planes", label: "Planes" },
+    { href: "#entrenadores", label: "Entrenadores" },
+    ...(horariosEnabled ? [{ href: "#horarios", label: "Horarios" }] : []),
+    { href: "#contacto", label: "Contacto" },
+  ];
+
   return (
     <footer className="border-t border-line bg-ink">
       <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8">

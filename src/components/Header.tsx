@@ -3,16 +3,22 @@
 import { useState } from "react";
 import { Menu, X, Zap } from "lucide-react";
 
-const LINKS = [
-  { href: "#clases", label: "Clases" },
-  { href: "#planes", label: "Planes" },
-  { href: "#entrenadores", label: "Equipo" },
-  { href: "#horarios", label: "Horarios" },
-  { href: "#contacto", label: "Contacto" },
-];
-
-export default function Header() {
+export default function Header({
+  classesEnabled = true,
+  horariosEnabled = true,
+}: {
+  classesEnabled?: boolean;
+  horariosEnabled?: boolean;
+}) {
   const [open, setOpen] = useState(false);
+
+  const LINKS = [
+    ...(classesEnabled ? [{ href: "#clases", label: "Clases" }] : []),
+    { href: "#planes", label: "Planes" },
+    { href: "#entrenadores", label: "Equipo" },
+    ...(horariosEnabled ? [{ href: "#horarios", label: "Horarios" }] : []),
+    { href: "#contacto", label: "Contacto" },
+  ];
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-6 py-5 lg:px-16">

@@ -34,7 +34,7 @@ export default async function Home() {
     ],
   };
 
-  const showSchedule = site.horariosEnabled && site.scheduleBlocks.length > 0;
+  const showSchedule = site.horariosEnabled;
 
   return (
     <>

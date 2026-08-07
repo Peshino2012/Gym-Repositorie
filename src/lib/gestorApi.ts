@@ -21,11 +21,27 @@ export type SiteGalleryPhoto = {
   caption: string | null;
 };
 
+export type SiteScheduleEntry = {
+  id: string;
+  time: string;
+  name: string;
+};
+
+export type SiteScheduleBlock = {
+  id: string;
+  title: string;
+  hoursLabel: string;
+  icon: string;
+  entries: SiteScheduleEntry[];
+};
+
 export type SiteData = {
   gym: { name: string; address: string | null; phone: string | null; email: string | null };
   plans: SitePlan[];
   trainers: SiteTrainer[];
   gallery: SiteGalleryPhoto[];
+  classesEnabled: boolean;
+  scheduleBlocks: SiteScheduleBlock[];
 };
 
 const EMPTY_SITE_DATA: SiteData = {
@@ -33,6 +49,8 @@ const EMPTY_SITE_DATA: SiteData = {
   plans: [],
   trainers: [],
   gallery: [],
+  classesEnabled: false,
+  scheduleBlocks: [],
 };
 
 // PULSO is sold and hosted separately from GestorGym (the admin panel), so

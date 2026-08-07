@@ -51,7 +51,9 @@ export default async function Home() {
         <Trainers trainers={site.trainers} />
         <Gallery photos={site.gallery} />
         <Testimonials />
-        <Schedule />
+        {site.classesEnabled && site.scheduleBlocks.length > 0 && (
+          <Schedule blocks={site.scheduleBlocks} />
+        )}
         <Contact
           address={site.gym.address ?? undefined}
           phone={site.gym.phone ?? undefined}

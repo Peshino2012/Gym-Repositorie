@@ -6,19 +6,23 @@ import { Menu, X, Zap } from "lucide-react";
 export default function Header({
   classesEnabled = true,
   horariosEnabled = true,
+  planesEnabled = true,
 }: {
   classesEnabled?: boolean;
   horariosEnabled?: boolean;
+  planesEnabled?: boolean;
 }) {
   const [open, setOpen] = useState(false);
 
   const LINKS = [
     ...(classesEnabled ? [{ href: "#clases", label: "Clases" }] : []),
-    { href: "#planes", label: "Planes" },
+    ...(planesEnabled ? [{ href: "#planes", label: "Planes" }] : []),
     { href: "#entrenadores", label: "Equipo" },
     ...(horariosEnabled ? [{ href: "#horarios", label: "Horarios" }] : []),
     { href: "#contacto", label: "Contacto" },
   ];
+
+  const ctaHref = planesEnabled ? "#planes" : "#contacto";
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-6 py-5 lg:px-16">
@@ -45,7 +49,7 @@ export default function Header({
         </nav>
 
         <a
-          href="#planes"
+          href={ctaHref}
           className="hidden rounded-lg bg-nav-button px-6 py-2.5 text-xs font-semibold uppercase tracking-widest text-foreground transition-all hover:bg-nav-button/80 active:scale-[0.97] md:inline-flex md:items-center"
         >
           Sumate gratis
@@ -75,7 +79,7 @@ export default function Header({
             </a>
           ))}
           <a
-            href="#planes"
+            href={ctaHref}
             onClick={() => setOpen(false)}
             className="mt-2 rounded-lg bg-primary px-4 py-3 text-center text-xs font-semibold uppercase tracking-widest text-primary-foreground transition-all active:scale-[0.97]"
           >

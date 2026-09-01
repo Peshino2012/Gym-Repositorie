@@ -58,7 +58,7 @@ export default function Pricing({ plans = [] }: { plans?: SitePlan[] }) {
           name: p.name,
           price: p.price,
           period: CYCLE_PERIOD[p.billingCycle],
-          highlight: false,
+          highlight: p.featured,
           features: p.features,
         }))
       : FALLBACK_PLANS;

@@ -5,14 +5,16 @@ export default function Footer({
   address = "Av. Nazca 1234, Villa Devoto, CABA",
   classesEnabled = true,
   horariosEnabled = true,
+  planesEnabled = true,
 }: {
   address?: string;
   classesEnabled?: boolean;
   horariosEnabled?: boolean;
+  planesEnabled?: boolean;
 }) {
   const LINKS = [
     ...(classesEnabled ? [{ href: "#clases", label: "Clases" }] : []),
-    { href: "#planes", label: "Planes" },
+    ...(planesEnabled ? [{ href: "#planes", label: "Planes" }] : []),
     { href: "#entrenadores", label: "Entrenadores" },
     ...(horariosEnabled ? [{ href: "#horarios", label: "Horarios" }] : []),
     { href: "#contacto", label: "Contacto" },

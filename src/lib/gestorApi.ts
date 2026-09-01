@@ -5,6 +5,7 @@ export type SitePlan = {
   name: string;
   price: number;
   billingCycle: BillingCycle;
+  featured: boolean;
   features: string[];
 };
 
@@ -35,6 +36,13 @@ export type SiteScheduleBlock = {
   entries: SiteScheduleEntry[];
 };
 
+export type SiteClassCard = {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+};
+
 export type SiteData = {
   gym: { name: string; address: string | null; phone: string | null; email: string | null };
   plans: SitePlan[];
@@ -42,7 +50,9 @@ export type SiteData = {
   gallery: SiteGalleryPhoto[];
   classesEnabled: boolean;
   horariosEnabled: boolean;
+  planesEnabled: boolean;
   scheduleBlocks: SiteScheduleBlock[];
+  classCards: SiteClassCard[];
 };
 
 const EMPTY_SITE_DATA: SiteData = {
@@ -52,7 +62,9 @@ const EMPTY_SITE_DATA: SiteData = {
   gallery: [],
   classesEnabled: false,
   horariosEnabled: false,
+  planesEnabled: true,
   scheduleBlocks: [],
+  classCards: [],
 };
 
 // PULSO is sold and hosted separately from GestorGym (the admin panel), so
@@ -65,7 +77,7 @@ export async function getSiteData(): Promise<SiteData> {
 
   try {
     const res = await fetch(`${base}/api/public/site`, {
-      next: { revalidate: 15 },
+      next: { revalidate: 15, tags: ["site-data"] },
       signal: AbortSignal.timeout(3000),
     });
     if (!res.ok) return EMPTY_SITE_DATA;

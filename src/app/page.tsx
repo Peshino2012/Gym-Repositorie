@@ -42,14 +42,18 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Header classesEnabled={site.classesEnabled} horariosEnabled={showSchedule} />
+      <Header
+        classesEnabled={site.classesEnabled}
+        horariosEnabled={showSchedule}
+        planesEnabled={site.planesEnabled}
+      />
       <main>
         <Hero />
         <Marquee />
         <Stats />
-        {site.classesEnabled && <Classes />}
+        {site.classesEnabled && <Classes cards={site.classCards} />}
         <WhyUs />
-        <Pricing plans={site.plans} />
+        {site.planesEnabled && <Pricing plans={site.plans} />}
         <Trainers trainers={site.trainers} />
         <Gallery photos={site.gallery} />
         <Testimonials />
@@ -64,6 +68,7 @@ export default async function Home() {
         address={site.gym.address ?? undefined}
         classesEnabled={site.classesEnabled}
         horariosEnabled={showSchedule}
+        planesEnabled={site.planesEnabled}
       />
     </>
   );

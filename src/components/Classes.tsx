@@ -14,7 +14,7 @@ const ICON_MAP: Record<string, typeof Dumbbell> = {
   zap: Zap,
 };
 
-export default function Classes({ cards }: { cards: SiteClassCard[] }) {
+export default function Classes({ cards = [] }: { cards?: SiteClassCard[] }) {
   return (
     <section id="clases" className="bg-ink py-24">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">

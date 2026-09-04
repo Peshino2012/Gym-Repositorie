@@ -52,7 +52,7 @@
   --color-nav-button: hsl(var(--nav-button));
   --color-hero-bg: hsl(var(--hero-bg));
 
-  /* legacy PULSO aliases — existing sections reference these directly */
+  /* legacy color-token aliases — existing sections reference these directly */
   --color-ink: hsl(var(--hero-bg));
   --color-surface: hsl(var(--secondary));
   --color-surface-2: hsl(var(--muted));

@@ -10,7 +10,7 @@ import { sendContactEmail } from "@/lib/contactActions";
 export default function Contact({
   address = "Av. Nazca 1234, Villa Devoto, CABA",
   phone = "+54 11 0000-0000",
-  email = "hola@pulsogym.com.ar",
+  email = "hola@tugimnasio.com.ar",
 }: {
   address?: string;
   phone?: string;
@@ -84,7 +84,7 @@ export default function Contact({
               <InstagramIcon className="mt-0.5 h-5 w-5 shrink-0 text-power transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6" />
               <div>
                 <p className="text-sm font-bold text-white">Instagram</p>
-                <p className="text-sm text-muted-foreground">@pulsogym</p>
+                <p className="text-sm text-muted-foreground">@tugimnasio</p>
               </div>
             </div>
           </ScrollReveal>

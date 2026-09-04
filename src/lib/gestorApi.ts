@@ -56,7 +56,7 @@ export type SiteData = {
 };
 
 const EMPTY_SITE_DATA: SiteData = {
-  gym: { name: "PULSO Gym", address: null, phone: null, email: null },
+  gym: { name: "Mi Gimnasio", address: null, phone: null, email: null },
   plans: [],
   trainers: [],
   gallery: [],
@@ -67,8 +67,8 @@ const EMPTY_SITE_DATA: SiteData = {
   classCards: [],
 };
 
-// PULSO is sold and hosted separately from GestorGym (the admin panel), so
-// this fetch can legitimately fail — no panel deployed yet for this client,
+// This site is sold and hosted separately from the admin panel, so this
+// fetch can legitimately fail — no panel deployed yet for this client,
 // panel temporarily down, etc. Always fall back to empty data rather than
 // let a broken connection take down the public site.
 export async function getSiteData(): Promise<SiteData> {

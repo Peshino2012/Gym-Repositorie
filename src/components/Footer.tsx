@@ -30,7 +30,7 @@ export default function Footer({
               className="font-display flex items-center gap-1.5 text-2xl tracking-wide"
             >
               <Zap className="h-5 w-5 fill-power text-power" strokeWidth={0} />
-              PULSO
+              Mi Gimnasio
             </a>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               Entrenamiento serio, resultados medibles, todos los días.
@@ -67,7 +67,7 @@ export default function Footer({
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-line pt-6 text-xs text-muted-2 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} PULSO Gym. Todos los derechos reservados.</p>
+          <p>© {new Date().getFullYear()} Mi Gimnasio. Todos los derechos reservados.</p>
           <p>{address}</p>
         </div>
       </div>

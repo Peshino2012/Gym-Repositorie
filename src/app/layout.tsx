@@ -15,9 +15,9 @@ const bebasNeue = Bebas_Neue({
 });
 
 const SITE_URL = "https://gym-repositorie.vercel.app";
-const TITLE = "PULSO GYM — Entrenamiento serio, resultados medibles";
+const TITLE = "MI GIMNASIO — Entrenamiento serio, resultados medibles";
 const DESCRIPTION =
-  "PULSO es un gimnasio con equipamiento completo, entrenadores certificados y seguimiento real de tu progreso. Musculación, funcional, boxeo, spinning y más. Sumate hoy.";
+  "Un gimnasio con equipamiento completo, entrenadores certificados y seguimiento real de tu progreso. Musculación, funcional, boxeo, spinning y más. Sumate hoy.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -30,15 +30,15 @@ export const metadata: Metadata = {
     "entrenamiento funcional",
     "boxeo",
     "spinning",
-    "PULSO Gym",
+    "Mi Gimnasio",
   ],
-  authors: [{ name: "PULSO Gym" }],
+  authors: [{ name: "Mi Gimnasio" }],
   alternates: { canonical: SITE_URL },
   openGraph: {
     type: "website",
     locale: "es_AR",
     url: SITE_URL,
-    siteName: "PULSO Gym",
+    siteName: "Mi Gimnasio",
     title: TITLE,
     description: DESCRIPTION,
   },

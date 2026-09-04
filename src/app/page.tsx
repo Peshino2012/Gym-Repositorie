@@ -19,7 +19,7 @@ export default async function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ExerciseGym",
-    name: site.gym.name || "PULSO Gym",
+    name: site.gym.name || "Mi Gimnasio",
     image: "https://gym-repositorie.vercel.app/opengraph-image",
     url: "https://gym-repositorie.vercel.app",
     telephone: site.gym.phone ?? undefined,
@@ -27,7 +27,7 @@ export default async function Home() {
     address: site.gym.address
       ? { "@type": "PostalAddress", streetAddress: site.gym.address, addressLocality: "Buenos Aires", addressCountry: "AR" }
       : undefined,
-    sameAs: ["https://www.instagram.com/pulsogym"],
+    sameAs: ["https://www.instagram.com/tugimnasio"],
     openingHoursSpecification: [
       { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "06:00", closes: "23:00" },
       { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "08:00", closes: "13:00" },

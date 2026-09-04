@@ -30,7 +30,7 @@ export default function WhyUs() {
       <div className="mx-auto grid max-w-6xl gap-14 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10">
         <ScrollReveal className="lg:sticky lg:top-28 lg:self-start">
           <p className="text-sm font-bold uppercase tracking-[0.25em] text-volt">
-            Por qué PULSO
+            Por qué nosotros
           </p>
           <h2 className="font-display mt-3 text-4xl leading-[0.95] sm:text-5xl">
             No es un gimnasio más.{" "}

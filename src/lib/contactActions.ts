@@ -17,7 +17,7 @@ export async function sendContactEmail(data: {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
     await resend.emails.send({
-      from: "PULSO <onboarding@resend.dev>",
+      from: "Cauccen <onboarding@resend.dev>",
       to: data.toEmail,
       subject: `Nueva consulta de ${data.name}`,
       text: `Nombre: ${data.name}\nTeléfono: ${data.phone}\n\nMensaje:\n${data.message || "(sin mensaje)"}`,

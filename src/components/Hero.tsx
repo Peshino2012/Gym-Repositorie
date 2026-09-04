@@ -31,13 +31,13 @@ export default function Hero() {
             className="block opacity-0 animate-fade-up"
             style={{ animationDelay: "0.2s" }}
           >
-            PULSO
+            MI
           </span>
           <span
             className="block text-primary opacity-0 animate-fade-up"
             style={{ animationDelay: "0.35s" }}
           >
-            GYM
+            GIMNASIO
           </span>
         </h1>
 

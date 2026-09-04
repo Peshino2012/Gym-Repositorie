@@ -33,7 +33,7 @@ export default function Header({
           onClick={() => setOpen(false)}
         >
           <Zap className="h-4 w-4 fill-primary text-primary" strokeWidth={0} />
-          PULSO
+          Mi Gimnasio
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">

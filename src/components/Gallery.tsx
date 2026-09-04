@@ -22,7 +22,7 @@ export default function Gallery({ photos = [] }: { photos?: SiteGalleryPhoto[] }
           </p>
           <h2 className="font-display mt-3 text-4xl leading-[0.95] sm:text-5xl">
             Así se vive{" "}
-            <span className="text-gradient-power">un día en PULSO.</span>
+            <span className="text-gradient-power">un día en el gimnasio.</span>
           </h2>
         </ScrollReveal>
 

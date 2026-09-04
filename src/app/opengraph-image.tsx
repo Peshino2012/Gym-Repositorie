@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "PULSO GYM — Entrenamiento serio, resultados medibles";
+export const alt = "MI GIMNASIO — Entrenamiento serio, resultados medibles";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -56,7 +56,7 @@ export default async function OpengraphImage() {
             letterSpacing: -2,
           }}
         >
-          PULSO
+          MI
         </div>
         <div
           style={{
@@ -68,7 +68,7 @@ export default async function OpengraphImage() {
             marginBottom: 40,
           }}
         >
-          GYM
+          GIMNASIO
         </div>
         <div
           style={{

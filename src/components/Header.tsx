@@ -4,10 +4,12 @@ import { useState } from "react";
 import { Menu, X, Zap } from "lucide-react";
 
 export default function Header({
+  gymName = "Mi Gimnasio",
   classesEnabled = true,
   horariosEnabled = true,
   planesEnabled = true,
 }: {
+  gymName?: string;
   classesEnabled?: boolean;
   horariosEnabled?: boolean;
   planesEnabled?: boolean;
@@ -33,7 +35,7 @@ export default function Header({
           onClick={() => setOpen(false)}
         >
           <Zap className="h-4 w-4 fill-primary text-primary" strokeWidth={0} />
-          Mi Gimnasio
+          {gymName}
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">

@@ -1,10 +1,21 @@
 import { ImageResponse } from "next/og";
+import { getSiteData } from "@/lib/gestorApi";
 
-export const alt = "MI GIMNASIO — Entrenamiento serio, resultados medibles";
+// Next requires `alt` as a static string export — can't compute it from the
+// same fetch the image itself uses below, so it stays generic.
+export const alt = "Entrenamiento serio, resultados medibles";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OpengraphImage() {
+  const site = await getSiteData();
+  const gymName = site.gym.name;
+  // A long real gym name wrapping across two 168px lines (the old fixed
+  // "MI" / "GIMNASIO" split) reads fine for a short name but overflows or
+  // looks broken for a longer one — one line, sized to the name, is safe
+  // for any gym.
+  const fontSize = gymName.length > 14 ? 96 : 168;
+
   return new ImageResponse(
     (
       <div
@@ -50,25 +61,15 @@ export default async function OpengraphImage() {
         <div
           style={{
             display: "flex",
-            fontSize: 168,
-            lineHeight: 0.9,
-            color: "#f5f5f5",
-            letterSpacing: -2,
-          }}
-        >
-          MI
-        </div>
-        <div
-          style={{
-            display: "flex",
-            fontSize: 168,
+            fontSize,
             lineHeight: 0.9,
             color: "#ff3b2e",
             letterSpacing: -2,
             marginBottom: 40,
+            textTransform: "uppercase",
           }}
         >
-          GIMNASIO
+          {gymName}
         </div>
         <div
           style={{

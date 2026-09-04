@@ -43,6 +43,7 @@ export default async function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Header
+        gymName={site.gym.name}
         classesEnabled={site.classesEnabled}
         horariosEnabled={showSchedule}
         planesEnabled={site.planesEnabled}
@@ -65,6 +66,7 @@ export default async function Home() {
         />
       </main>
       <Footer
+        gymName={site.gym.name}
         address={site.gym.address ?? undefined}
         classesEnabled={site.classesEnabled}
         horariosEnabled={showSchedule}

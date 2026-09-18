@@ -1,6 +1,25 @@
 import HeroVideo from "./HeroVideo";
 
-export default function Hero() {
+export default function Hero({
+  titleLine1 = "MI",
+  titleLine2 = "GIMNASIO",
+  subtitle = "Entrenás con todo. Progreso que se mide.",
+  description = "Musculación, funcional, boxeo y clases grupales con seguimiento real de tu progreso. Equipamiento moderno, entrenadores certificados, planes pensados para resultados.",
+  tagline,
+  whatsappPhone,
+}: {
+  titleLine1?: string;
+  titleLine2?: string;
+  subtitle?: string;
+  description?: string;
+  tagline?: string;
+  /** Digits-only phone. When present, "Reservar clase" opens WhatsApp directly instead of scrolling to the contact form. */
+  whatsappPhone?: string;
+}) {
+  const reserveHref = whatsappPhone
+    ? `https://wa.me/${whatsappPhone}?text=${encodeURIComponent("Hola! Quiero reservar una clase.")}`
+    : "#contacto";
+
   return (
     <section
       id="inicio"
@@ -31,13 +50,13 @@ export default function Hero() {
             className="block opacity-0 animate-fade-up"
             style={{ animationDelay: "0.2s" }}
           >
-            MI
+            {titleLine1}
           </span>
           <span
             className="block text-primary opacity-0 animate-fade-up"
             style={{ animationDelay: "0.35s" }}
           >
-            GIMNASIO
+            {titleLine2}
           </span>
         </h1>
 
@@ -45,16 +64,14 @@ export default function Hero() {
           className="mb-3 text-[clamp(1.125rem,2.5vw,1.875rem)] font-light text-foreground/80 opacity-0 animate-fade-up md:mb-6"
           style={{ animationDelay: "0.4s" }}
         >
-          Entrenás con todo. Progreso que se mide.
+          {subtitle}
         </p>
 
         <p
           className="mb-4 max-w-md text-[clamp(0.875rem,1.5vw,1.25rem)] font-light text-muted-foreground opacity-0 animate-fade-up md:mb-8"
           style={{ animationDelay: "0.55s" }}
         >
-          Musculación, funcional, boxeo y clases grupales con seguimiento
-          real de tu progreso. Equipamiento moderno, entrenadores
-          certificados, planes pensados para resultados.
+          {description}
         </p>
 
         <div
@@ -62,7 +79,9 @@ export default function Hero() {
           style={{ animationDelay: "0.7s" }}
         >
           <a
-            href="#contacto"
+            href={reserveHref}
+            target={whatsappPhone ? "_blank" : undefined}
+            rel={whatsappPhone ? "noopener noreferrer" : undefined}
             className="pointer-events-auto cursor-pointer rounded-sm bg-primary px-6 py-3 text-sm text-primary-foreground transition-all hover:brightness-110 active:scale-[0.97] md:px-8 md:py-4"
           >
             Reservar clase
@@ -75,13 +94,14 @@ export default function Hero() {
           </a>
         </div>
 
-        <p
-          className="mt-4 text-xs font-light text-muted-foreground/60 opacity-0 animate-fade-up md:mt-6"
-          style={{ animationDelay: "0.85s" }}
-        >
-          Gimnasio con equipamiento completo. Villa Devoto, CABA. +500 socios
-          activos.
-        </p>
+        {tagline && (
+          <p
+            className="mt-4 text-xs font-light text-muted-foreground/60 opacity-0 animate-fade-up md:mt-6"
+            style={{ animationDelay: "0.85s" }}
+          >
+            {tagline}
+          </p>
+        )}
       </div>
     </section>
   );

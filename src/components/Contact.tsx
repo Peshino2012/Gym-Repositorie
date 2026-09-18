@@ -8,13 +8,15 @@ import MagneticButton from "./MagneticButton";
 import { sendContactEmail } from "@/lib/contactActions";
 
 export default function Contact({
-  address = "Av. Nazca 1234, Villa Devoto, CABA",
-  phone = "+54 11 0000-0000",
-  email = "hola@tugimnasio.com.ar",
+  address,
+  phone,
+  email,
+  instagramHandle,
 }: {
   address?: string;
   phone?: string;
   email?: string;
+  instagramHandle?: string;
 }) {
   const [sent, setSent] = useState(false);
 
@@ -26,7 +28,7 @@ export default function Contact({
     const visitorPhone = String(data.get("phone") ?? "");
     const message = String(data.get("message") ?? "");
 
-    const gymDigits = phone.replace(/\D/g, "");
+    const gymDigits = phone?.replace(/\D/g, "");
     if (gymDigits) {
       const text = `Hola! Soy ${name} (${visitorPhone}).${message ? ` ${message}` : ""}`;
       window.open(
@@ -35,7 +37,9 @@ export default function Contact({
       );
     }
 
-    sendContactEmail({ name, phone: visitorPhone, message, toEmail: email });
+    if (email) {
+      sendContactEmail({ name, phone: visitorPhone, message, toEmail: email });
+    }
 
     setSent(true);
   }
@@ -59,34 +63,42 @@ export default function Contact({
 
         <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-2">
           <ScrollReveal className="space-y-4">
-            <div className="group flex items-start gap-4 rounded-2xl border border-line bg-ink p-5 transition-colors duration-300 hover:border-power/50">
-              <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-power transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6" />
-              <div>
-                <p className="text-sm font-bold text-white">Dirección</p>
-                <p className="text-sm text-muted-foreground">{address}</p>
+            {address && (
+              <div className="group flex items-start gap-4 rounded-2xl border border-line bg-ink p-5 transition-colors duration-300 hover:border-power/50">
+                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-power transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6" />
+                <div>
+                  <p className="text-sm font-bold text-white">Dirección</p>
+                  <p className="text-sm text-muted-foreground">{address}</p>
+                </div>
               </div>
-            </div>
-            <div className="group flex items-start gap-4 rounded-2xl border border-line bg-ink p-5 transition-colors duration-300 hover:border-power/50">
-              <Phone className="mt-0.5 h-5 w-5 shrink-0 text-power transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6" />
-              <div>
-                <p className="text-sm font-bold text-white">Teléfono</p>
-                <p className="text-sm text-muted-foreground">{phone}</p>
+            )}
+            {phone && (
+              <div className="group flex items-start gap-4 rounded-2xl border border-line bg-ink p-5 transition-colors duration-300 hover:border-power/50">
+                <Phone className="mt-0.5 h-5 w-5 shrink-0 text-power transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6" />
+                <div>
+                  <p className="text-sm font-bold text-white">Teléfono</p>
+                  <p className="text-sm text-muted-foreground">{phone}</p>
+                </div>
               </div>
-            </div>
-            <div className="group flex items-start gap-4 rounded-2xl border border-line bg-ink p-5 transition-colors duration-300 hover:border-power/50">
-              <Mail className="mt-0.5 h-5 w-5 shrink-0 text-power transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6" />
-              <div>
-                <p className="text-sm font-bold text-white">Email</p>
-                <p className="text-sm text-muted-foreground">{email}</p>
+            )}
+            {email && (
+              <div className="group flex items-start gap-4 rounded-2xl border border-line bg-ink p-5 transition-colors duration-300 hover:border-power/50">
+                <Mail className="mt-0.5 h-5 w-5 shrink-0 text-power transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6" />
+                <div>
+                  <p className="text-sm font-bold text-white">Email</p>
+                  <p className="text-sm text-muted-foreground">{email}</p>
+                </div>
               </div>
-            </div>
-            <div className="group flex items-start gap-4 rounded-2xl border border-line bg-ink p-5 transition-colors duration-300 hover:border-power/50">
-              <InstagramIcon className="mt-0.5 h-5 w-5 shrink-0 text-power transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6" />
-              <div>
-                <p className="text-sm font-bold text-white">Instagram</p>
-                <p className="text-sm text-muted-foreground">@tugimnasio</p>
+            )}
+            {instagramHandle && (
+              <div className="group flex items-start gap-4 rounded-2xl border border-line bg-ink p-5 transition-colors duration-300 hover:border-power/50">
+                <InstagramIcon className="mt-0.5 h-5 w-5 shrink-0 text-power transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6" />
+                <div>
+                  <p className="text-sm font-bold text-white">Instagram</p>
+                  <p className="text-sm text-muted-foreground">@{instagramHandle}</p>
+                </div>
               </div>
-            </div>
+            )}
           </ScrollReveal>
 
           <ScrollReveal>

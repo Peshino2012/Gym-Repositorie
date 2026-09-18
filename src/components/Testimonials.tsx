@@ -1,5 +1,6 @@
 import { Star, Quote } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
+import { siteConfig } from "@/lib/siteConfig";
 
 const REVIEWS = [
   {
@@ -22,7 +23,12 @@ const REVIEWS = [
   },
 ];
 
+// Fabricated reviews with invented names — sales-demo flourish, never real
+// social proof, so this must not render for an actual client until there's
+// a real reviews data source.
 export default function Testimonials() {
+  if (!siteConfig.showPlaceholderContent) return null;
+
   return (
     <section className="bg-surface py-24">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">

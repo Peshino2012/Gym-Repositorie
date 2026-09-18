@@ -1,5 +1,6 @@
 import AnimatedCounter from "./AnimatedCounter";
 import ScrollReveal from "./ScrollReveal";
+import { siteConfig } from "@/lib/siteConfig";
 
 const STATS = [
   { to: 500, suffix: "+", label: "Miembros activos" },
@@ -8,7 +9,12 @@ const STATS = [
   { to: 98, suffix: "%", label: "Nos recomienda" },
 ];
 
+// These numbers aren't backed by real data anywhere — fine as sales-demo
+// flourish, but showing them on a real client's site would be fabricating
+// stats about their business.
 export default function Stats() {
+  if (!siteConfig.showPlaceholderContent) return null;
+
   return (
     <section className="border-b border-line bg-surface">
       <ScrollReveal

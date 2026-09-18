@@ -12,26 +12,27 @@ import Schedule from "@/components/Schedule";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { getSiteData } from "@/lib/gestorApi";
+import { siteConfig } from "@/lib/siteConfig";
 
 export default async function Home() {
   const site = await getSiteData();
+  const instagramUrl = siteConfig.instagramHandle
+    ? `https://www.instagram.com/${siteConfig.instagramHandle}`
+    : undefined;
+  const whatsappPhone = site.gym.phone?.replace(/\D/g, "");
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ExerciseGym",
     name: site.gym.name || "Mi Gimnasio",
-    image: "https://gym-repositorie.vercel.app/opengraph-image",
-    url: "https://gym-repositorie.vercel.app",
+    image: `${siteConfig.siteUrl}/opengraph-image`,
+    url: siteConfig.siteUrl,
     telephone: site.gym.phone ?? undefined,
     email: site.gym.email ?? undefined,
     address: site.gym.address
       ? { "@type": "PostalAddress", streetAddress: site.gym.address, addressLocality: "Buenos Aires", addressCountry: "AR" }
       : undefined,
-    sameAs: ["https://www.instagram.com/tugimnasio"],
-    openingHoursSpecification: [
-      { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "06:00", closes: "23:00" },
-      { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "08:00", closes: "13:00" },
-    ],
+    sameAs: instagramUrl ? [instagramUrl] : undefined,
   };
 
   const showSchedule = site.horariosEnabled;
@@ -49,7 +50,14 @@ export default async function Home() {
         planesEnabled={site.planesEnabled}
       />
       <main>
-        <Hero />
+        <Hero
+          titleLine1={siteConfig.hero.titleLine1}
+          titleLine2={siteConfig.hero.titleLine2}
+          subtitle={siteConfig.hero.subtitle}
+          description={siteConfig.hero.description}
+          tagline={siteConfig.hero.tagline}
+          whatsappPhone={whatsappPhone}
+        />
         <Marquee />
         <Stats />
         {site.classesEnabled && <Classes cards={site.classCards} />}
@@ -63,11 +71,13 @@ export default async function Home() {
           address={site.gym.address ?? undefined}
           phone={site.gym.phone ?? undefined}
           email={site.gym.email ?? undefined}
+          instagramHandle={siteConfig.instagramHandle}
         />
       </main>
       <Footer
         gymName={site.gym.name}
         address={site.gym.address ?? undefined}
+        instagramUrl={instagramUrl}
         classesEnabled={site.classesEnabled}
         horariosEnabled={showSchedule}
         planesEnabled={site.planesEnabled}

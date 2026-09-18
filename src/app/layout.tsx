@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Sora, Bebas_Neue } from "next/font/google";
 import { getSiteData } from "@/lib/gestorApi";
+import { siteConfig } from "@/lib/siteConfig";
 import "./globals.css";
 
 const sora = Sora({
@@ -15,9 +16,10 @@ const bebasNeue = Bebas_Neue({
   weight: ["400"],
 });
 
-const SITE_URL = "https://gym-repositorie.vercel.app";
+const SITE_URL = siteConfig.siteUrl;
 const TAGLINE = "Entrenamiento serio, resultados medibles";
 const DESCRIPTION =
+  siteConfig.hero.description ??
   "Un gimnasio con equipamiento completo, entrenadores certificados y seguimiento real de tu progreso. Musculación, funcional, boxeo, spinning y más. Sumate hoy.";
 
 // Metadata needs the same real gym name the page itself shows (site.gym.name)
@@ -32,15 +34,9 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL(SITE_URL),
     title,
     description: DESCRIPTION,
-    keywords: [
-      "gimnasio Villa Devoto",
-      "gimnasio CABA",
-      "musculación",
-      "entrenamiento funcional",
-      "boxeo",
-      "spinning",
-      gymName,
-    ],
+    keywords: siteConfig.showPlaceholderContent
+      ? ["gimnasio Villa Devoto", "gimnasio CABA", "musculación", "entrenamiento funcional", "boxeo", "spinning", gymName]
+      : ["musculación", "entrenamiento funcional", "pesas libres", gymName],
     authors: [{ name: gymName }],
     alternates: { canonical: SITE_URL },
     openGraph: {
@@ -73,6 +69,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es"
       className={`${sora.variable} ${bebasNeue.variable} h-full antialiased`}
     >
+      {siteConfig.themeColor && (
+        <head>
+          <style>{`:root { --primary: ${siteConfig.themeColor}; }`}</style>
+        </head>
+      )}
       <body className="min-h-full flex flex-col bg-ink text-white">
         {children}
       </body>

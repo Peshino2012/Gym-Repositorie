@@ -3,13 +3,17 @@ import { InstagramIcon, FacebookIcon } from "./icons/SocialIcons";
 
 export default function Footer({
   gymName = "Mi Gimnasio",
-  address = "Av. Nazca 1234, Villa Devoto, CABA",
+  address,
+  instagramUrl,
+  facebookUrl,
   classesEnabled = true,
   horariosEnabled = true,
   planesEnabled = true,
 }: {
   gymName?: string;
   address?: string;
+  instagramUrl?: string;
+  facebookUrl?: string;
   classesEnabled?: boolean;
   horariosEnabled?: boolean;
   planesEnabled?: boolean;
@@ -37,22 +41,32 @@ export default function Footer({
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               Entrenamiento serio, resultados medibles, todos los días.
             </p>
-            <div className="mt-5 flex gap-3">
-              <a
-                href="#"
-                aria-label="Instagram"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-muted-foreground transition-colors hover:border-power hover:text-power"
-              >
-                <InstagramIcon className="h-4 w-4" />
-              </a>
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-muted-foreground transition-colors hover:border-power hover:text-power"
-              >
-                <FacebookIcon className="h-4 w-4" />
-              </a>
-            </div>
+            {(instagramUrl || facebookUrl) && (
+              <div className="mt-5 flex gap-3">
+                {instagramUrl && (
+                  <a
+                    href={instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-muted-foreground transition-colors hover:border-power hover:text-power"
+                  >
+                    <InstagramIcon className="h-4 w-4" />
+                  </a>
+                )}
+                {facebookUrl && (
+                  <a
+                    href={facebookUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-muted-foreground transition-colors hover:border-power hover:text-power"
+                  >
+                    <FacebookIcon className="h-4 w-4" />
+                  </a>
+                )}
+              </div>
+            )}
           </div>
 
           <nav className="flex flex-wrap gap-x-8 gap-y-3 sm:justify-end">
@@ -70,7 +84,7 @@ export default function Footer({
 
         <div className="mt-12 flex flex-col gap-3 border-t border-line pt-6 text-xs text-muted-2 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} {gymName}. Todos los derechos reservados.</p>
-          <p>{address}</p>
+          {address && <p>{address}</p>}
         </div>
       </div>
     </footer>

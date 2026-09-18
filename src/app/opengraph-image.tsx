@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { getSiteData } from "@/lib/gestorApi";
+import { siteConfig } from "@/lib/siteConfig";
 
 // Next requires `alt` as a static string export — can't compute it from the
 // same fetch the image itself uses below, so it stays generic.
@@ -47,16 +48,18 @@ export default async function OpengraphImage() {
               background: "#ff3b2e",
             }}
           />
-          <div
-            style={{
-              fontSize: 28,
-              letterSpacing: 6,
-              color: "#a3a3a3",
-              textTransform: "uppercase",
-            }}
-          >
-            Villa Devoto · CABA
-          </div>
+          {siteConfig.showPlaceholderContent && (
+            <div
+              style={{
+                fontSize: 28,
+                letterSpacing: 6,
+                color: "#a3a3a3",
+                textTransform: "uppercase",
+              }}
+            >
+              Villa Devoto · CABA
+            </div>
+          )}
         </div>
         <div
           style={{
@@ -79,7 +82,7 @@ export default async function OpengraphImage() {
             fontWeight: 300,
           }}
         >
-          Entrenás con todo. Progreso que se mide.
+          {siteConfig.hero.subtitle ?? "Entrenás con todo. Progreso que se mide."}
         </div>
       </div>
     ),

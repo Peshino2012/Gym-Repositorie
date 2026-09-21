@@ -44,7 +44,7 @@ export type SiteClassCard = {
 };
 
 export type SiteData = {
-  gym: { name: string; address: string | null; phone: string | null; email: string | null };
+  gym: { name: string; address: string | null; phone: string | null; email: string | null; logoUrl: string | null };
   plans: SitePlan[];
   trainers: SiteTrainer[];
   gallery: SiteGalleryPhoto[];
@@ -56,7 +56,7 @@ export type SiteData = {
 };
 
 const EMPTY_SITE_DATA: SiteData = {
-  gym: { name: "Mi Gimnasio", address: null, phone: null, email: null },
+  gym: { name: "Mi Gimnasio", address: null, phone: null, email: null, logoUrl: null },
   plans: [],
   trainers: [],
   gallery: [],

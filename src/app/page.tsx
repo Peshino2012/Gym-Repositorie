@@ -55,6 +55,7 @@ export default async function Home({
       />
       <Header
         gymName={site.gym.name}
+        gymLogoUrl={site.gym.logoUrl}
         classesEnabled={site.classesEnabled}
         horariosEnabled={showSchedule}
         planesEnabled={site.planesEnabled}

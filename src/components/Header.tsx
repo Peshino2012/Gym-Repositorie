@@ -5,11 +5,13 @@ import { Menu, X, Zap } from "lucide-react";
 
 export default function Header({
   gymName = "Mi Gimnasio",
+  gymLogoUrl,
   classesEnabled = true,
   horariosEnabled = true,
   planesEnabled = true,
 }: {
   gymName?: string;
+  gymLogoUrl?: string | null;
   classesEnabled?: boolean;
   horariosEnabled?: boolean;
   planesEnabled?: boolean;
@@ -34,7 +36,12 @@ export default function Header({
           className="flex items-center gap-1.5 text-xl font-semibold tracking-tight text-foreground"
           onClick={() => setOpen(false)}
         >
-          <Zap className="h-4 w-4 fill-primary text-primary" strokeWidth={0} />
+          {gymLogoUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element -- arbitrary remote logo, dimensions unknown ahead of time
+            <img src={gymLogoUrl} alt="" className="h-7 w-auto max-w-[8rem] object-contain" />
+          ) : (
+            <Zap className="h-4 w-4 fill-primary text-primary" strokeWidth={0} />
+          )}
           {gymName}
         </a>
 

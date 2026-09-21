@@ -25,8 +25,21 @@ export default function Hero({
       id="inicio"
       className="grain relative flex min-h-screen items-end overflow-hidden bg-hero-bg"
     >
-      {/* atmospheric background loop */}
-      <HeroVideo src="/media/gym-loop.mp4" />
+      {/* atmospheric background loop — desaturated so its own baked-in
+          lighting (warm/red in the stock footage) doesn't fight whatever
+          color this gym's theme actually is; the tint layer below recolors
+          it toward --primary instead. */}
+      <div className="absolute inset-0 [filter:saturate(0.25)_brightness(0.85)]">
+        <HeroVideo src="/media/gym-loop.mp4" />
+      </div>
+
+      {/* ties the muted footage to this gym's own brand color instead of
+          neutral gray — "color" blend mode recolors by hue without
+          flattening the video's own light/dark detail */}
+      <div
+        aria-hidden
+        className="absolute inset-0 z-0 bg-primary/50 [mix-blend-mode:color] pointer-events-none"
+      />
 
       {/* ambient aurora glow, layered over the video */}
       <div aria-hidden className="absolute inset-0 z-0">
@@ -41,7 +54,7 @@ export default function Hero({
       </div>
 
       {/* dark overlay for legibility */}
-      <div className="absolute inset-0 z-[1] bg-black/50 pointer-events-none" />
+      <div className="absolute inset-0 z-[1] bg-black/60 pointer-events-none" />
 
       {/* content, bottom-left anchored */}
       <div className="relative z-10 w-full max-w-[90%] px-6 pb-14 pt-32 pointer-events-none sm:max-w-md md:px-10 md:pb-16 lg:max-w-2xl">

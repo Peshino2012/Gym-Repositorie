@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Sora, Bebas_Neue } from "next/font/google";
 import { getSiteData } from "@/lib/gestorApi";
 import { siteConfig } from "@/lib/siteConfig";
+import BackToTop from "@/components/BackToTop";
 import "./globals.css";
 
 const sora = Sora({
@@ -75,7 +76,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </head>
       )}
       <body className="min-h-full flex flex-col bg-ink text-white">
+        {/* Invisible until focused — lets a keyboard/screen-reader user
+            skip the header nav and jump straight to the page content. */}
+        <a
+          href="#inicio"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-primary-foreground"
+        >
+          Saltar al contenido
+        </a>
         {children}
+        <BackToTop />
       </body>
     </html>
   );

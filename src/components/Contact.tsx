@@ -5,6 +5,7 @@ import { MapPin, Phone, Mail, Send, CheckCircle2 } from "lucide-react";
 import { InstagramIcon } from "./icons/SocialIcons";
 import ScrollReveal from "./ScrollReveal";
 import MagneticButton from "./MagneticButton";
+import CopyButton from "./CopyButton";
 import { sendContactEmail } from "@/lib/contactActions";
 
 export default function Contact({
@@ -12,11 +13,15 @@ export default function Contact({
   phone,
   email,
   instagramHandle,
+  leadSource,
 }: {
   address?: string;
   phone?: string;
   email?: string;
   instagramHandle?: string;
+  /** e.g. "instagram / promo-verano" from ?utm_source&utm_campaign, so the
+   * gym owner sees which campaign a lead came from. */
+  leadSource?: string;
 }) {
   const [sent, setSent] = useState(false);
 
@@ -27,10 +32,11 @@ export default function Contact({
     const name = String(data.get("name") ?? "");
     const visitorPhone = String(data.get("phone") ?? "");
     const message = String(data.get("message") ?? "");
+    const sourceNote = leadSource ? ` (vía ${leadSource})` : "";
 
     const gymDigits = phone?.replace(/\D/g, "");
     if (gymDigits) {
-      const text = `Hola! Soy ${name} (${visitorPhone}).${message ? ` ${message}` : ""}`;
+      const text = `Hola! Soy ${name} (${visitorPhone}).${message ? ` ${message}` : ""}${sourceNote}`;
       window.open(
         `https://wa.me/${gymDigits}?text=${encodeURIComponent(text)}`,
         "_blank"
@@ -38,7 +44,7 @@ export default function Contact({
     }
 
     if (email) {
-      sendContactEmail({ name, phone: visitorPhone, message, toEmail: email });
+      sendContactEmail({ name, phone: visitorPhone, message: `${message}${sourceNote}`, toEmail: email });
     }
 
     setSent(true);
@@ -70,6 +76,7 @@ export default function Contact({
                   <p className="text-sm font-bold text-white">Dirección</p>
                   <p className="text-sm text-muted-foreground">{address}</p>
                 </div>
+                <CopyButton value={address} label="dirección" />
               </div>
             )}
             {phone && (
@@ -79,6 +86,7 @@ export default function Contact({
                   <p className="text-sm font-bold text-white">Teléfono</p>
                   <p className="text-sm text-muted-foreground">{phone}</p>
                 </div>
+                <CopyButton value={phone} label="teléfono" />
               </div>
             )}
             {email && (

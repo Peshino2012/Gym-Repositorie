@@ -9,13 +9,23 @@ import Trainers from "@/components/Trainers";
 import Gallery from "@/components/Gallery";
 import Testimonials from "@/components/Testimonials";
 import Schedule from "@/components/Schedule";
+import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { getSiteData } from "@/lib/gestorApi";
 import { siteConfig } from "@/lib/siteConfig";
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
   const site = await getSiteData();
+  const params = await searchParams;
+  const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
+  const utmSource = first(params.utm_source);
+  const utmCampaign = first(params.utm_campaign);
+  const leadSource = [utmSource, utmCampaign].filter(Boolean).join(" / ") || undefined;
   const instagramUrl = siteConfig.instagramHandle
     ? `https://www.instagram.com/${siteConfig.instagramHandle}`
     : undefined;
@@ -67,11 +77,13 @@ export default async function Home() {
         <Gallery photos={site.gallery} />
         <Testimonials />
         {showSchedule && <Schedule blocks={site.scheduleBlocks} />}
+        <FAQ />
         <Contact
           address={site.gym.address ?? undefined}
           phone={site.gym.phone ?? undefined}
           email={site.gym.email ?? undefined}
           instagramHandle={siteConfig.instagramHandle}
+          leadSource={leadSource}
         />
       </main>
       <Footer

@@ -54,9 +54,11 @@ export async function generateMetadata(): Promise<Metadata> {
       description: DESCRIPTION,
     },
     robots: { index: true, follow: true },
-    icons: {
-      icon: "/favicon.ico",
-    },
+    // No explicit `icons` entry — that used to hardcode a link to
+    // /favicon.ico (deleted; see icon.tsx), which silently overrides
+    // Next's automatic file-convention icon detection and would keep
+    // pointing at a 404 forever otherwise. Leaving this out lets Next
+    // auto-link to whatever icon.tsx generates.
   };
 }
 
